@@ -2,6 +2,7 @@ dependencies:
   '@carbon/themes': 10.30.0
   '@emotion/babel-plugin': 11.2.0
   '@emotion/react': 11.1.5_cad2d10d978acf29faaf5e3800be8bd7
+  '@fontsource/inter': 4.2.2
   '@testing-library/jest-dom': 5.11.9
   '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
   '@testing-library/user-event': 12.8.3
@@ -15,6 +16,7 @@ dependencies:
   carbon-icons: 7.0.7
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
+  react-helmet: 6.1.0_react@17.0.1
   react-scripts: 4.0.3_288ff231b28507d5a09d103a0ffab2dd
   sass: 1.32.8
   typescript: 4.2.3
@@ -1515,6 +1517,10 @@ packages:
       node: ^10.12.0 || >=12.0.0
     resolution:
       integrity: sha512-2ZPCc+uNbjV5ERJr+aKSPRwZgKd2z11x0EgLvb1PURmUrn9QNRXFqje0Ldq454PfAVyaJYyrDvvIKSFP4NnBog==
+  /@fontsource/inter/4.2.2:
+    dev: false
+    resolution:
+      integrity: sha512-lvR1PQe+8FTTd3YRW84KGcgUR8leZ7S3aY+51MQ90MQHI0VQe3cDH6T6jjs1qTm+wPmWfdSVjN8ugvNZpGUnvA==
   /@hapi/address/2.1.4:
     deprecated: Moved to 'npm install @sideway/address'
     dev: false
@@ -10257,6 +10263,22 @@ packages:
     dev: false
     resolution:
       integrity: sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+  /react-fast-compare/3.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+  /react-helmet/6.1.0_react@17.0.1:
+    dependencies:
+      object-assign: 4.1.1
+      prop-types: 15.7.2
+      react: 17.0.1
+      react-fast-compare: 3.2.0
+      react-side-effect: 2.1.1_react@17.0.1
+    dev: false
+    peerDependencies:
+      react: '>=16.3.0'
+    resolution:
+      integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
   /react-is/16.13.1:
     dev: false
     resolution:
@@ -10348,6 +10370,14 @@ packages:
         optional: true
     resolution:
       integrity: sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A==
+  /react-side-effect/2.1.1_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0
+    resolution:
+      integrity: sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
   /react/17.0.1:
     dependencies:
       loose-envify: 1.4.0
@@ -13005,6 +13035,7 @@ specifiers:
   '@carbon/themes': ^10.30.0
   '@emotion/babel-plugin': ^11.2.0
   '@emotion/react': ^11.1.5
+  '@fontsource/inter': ^4.2.2
   '@testing-library/jest-dom': ^5.11.9
   '@testing-library/react': ^11.2.5
   '@testing-library/user-event': ^12.8.3
@@ -13018,6 +13049,7 @@ specifiers:
   carbon-icons: ^7.0.7
   react: ^17.0.1
   react-dom: ^17.0.1
+  react-helmet: ^6.1.0
   react-scripts: 4.0.3
   sass: ^1.32.8
   typescript: ^4.2.3
