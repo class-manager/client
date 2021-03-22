@@ -1,0 +1,11 @@
+name: classman-client
+kind: pipeline
+type: kubernetes
+
+steps:
+  - name: build
+    image: node:14-alpine
+    commands:
+      - npm install -g pnpm
+      - pnpm install
+      - pnpm build
