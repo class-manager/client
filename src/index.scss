@@ -1,0 +1,20 @@
+@import "~@carbon/themes/scss/themes";
+
+// Use the gray 90 theme
+// $carbon--theme: $carbon--theme--g90;
+// @include carbon--theme();
+
+$feature-flags: (
+    enable-css-custom-properties: true,
+);
+
+@import "~carbon-components/scss/globals/scss/css--helpers";
+@import "~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins";
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include carbon--theme($carbon--theme--g90, true);
+    }
+}
+
+@import "~carbon-components/scss/globals/scss/styles.scss";
