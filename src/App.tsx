@@ -4,8 +4,12 @@ import { AccountCircleRounded } from "@material-ui/icons";
 import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-components-react";
 import React from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { HomePage, LoginModalState } from "./components/HomePage";
 
 function App() {
+    const [, setLoginModalOpen] = useRecoilState(LoginModalState);
+
     return (
         <>
             <Global
@@ -30,11 +34,15 @@ function App() {
                     <HeaderName prefix="">Classman</HeaderName>
                 </Link>
                 <HeaderGlobalBar>
-                    <Link to="/login">
-                        <HeaderGlobalAction tooltipAlignment="end" aria-label="Login">
-                            <AccountCircleRounded />
-                        </HeaderGlobalAction>
-                    </Link>
+                    {/* <Link to="/login"> */}
+                    <HeaderGlobalAction
+                        tooltipAlignment="end"
+                        aria-label="Login"
+                        onClick={() => setLoginModalOpen(true)}
+                    >
+                        <AccountCircleRounded />
+                    </HeaderGlobalAction>
+                    {/* </Link> */}
                 </HeaderGlobalBar>
             </Header>
             <main
@@ -44,31 +52,7 @@ function App() {
                 }}
             >
                 <Switch>
-                    <Route path="/" exact>
-                        <div
-                            css={{
-                                height: "100%",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                flexDirection: "column",
-                                background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
-                                color: "#fff",
-                            }}
-                        >
-                            <h1
-                                css={{
-                                    padding: "1rem",
-                                    fontWeight: 500,
-                                    fontSize: "3rem",
-                                    textAlign: "center",
-                                }}
-                            >
-                                Welcome to Classman
-                            </h1>
-                            <p css={{ fontSize: "1.5rem" }}>A classroom manager utility.</p>
-                        </div>
-                    </Route>
+                    <Route path="/" exact component={HomePage} />
                     <Route path="/login">
                         <h1>This is the login screen</h1>
                     </Route>
