@@ -5,7 +5,8 @@ import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-
 import React from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { HomePage, LoginModalState } from "./components/HomePage";
+import { HomePage } from "./components/HomePage";
+import { LoginModalState } from "./components/LoginModal";
 
 function App() {
     const [, setLoginModalOpen] = useRecoilState(LoginModalState);

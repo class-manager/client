@@ -1,4 +1,5 @@
 dependencies:
+  '@carbon/colors': 10.22.0
   '@carbon/icons-react': 10.28.0_react@17.0.1
   '@carbon/themes': 10.30.0
   '@emotion/babel-plugin': 11.2.0
@@ -10,6 +11,7 @@ dependencies:
   '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
   '@testing-library/user-event': 12.8.3
   '@types/carbon-components-react': 7.30.0
+  '@types/carbon__colors': 0.0.1
   '@types/carbon__icons-react': 10.24.0
   '@types/jest': 26.0.21
   '@types/node': 12.20.6
@@ -41,6 +43,7 @@ dependencies:
   workbox-routing: 5.1.4
   workbox-strategies: 5.1.4
   workbox-streams: 5.1.4
+  yup: 0.32.9
 lockfileVersion: 5.2
 packages:
   /@babel/code-frame/7.10.4:
@@ -2259,6 +2262,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rI4A/MTTCBXGLvy3OwOJ28FMDHNd+LoNR+KPmxfpE9pHAc74g1LOGz5dZ1fSPW8zZZheY3x/gqq1t0noMPWi9Q==
+  /@types/carbon__colors/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-5PEpXocowvOuIP+3d8TTGF/aP8qdQHeteooyFdXhMcOXlS8+qBPeziAMpig9BKpUc1imWEH7taa2XeqTDhXD1g==
   /@types/carbon__icons-react/10.24.0:
     dev: false
     resolution:
@@ -2340,6 +2347,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MPtoySlAZQ37VoLaPcTHCu1RWJ4llDkULYZIzOYxlhxBqYPB0RsRlmMU0R6tahtFe27mIdkHV+551ZWV4PLmVw==
+  /@types/lodash/4.14.168:
+    dev: false
+    resolution:
+      integrity: sha512-oVfRvqHV/V6D1yifJbVRU3TMp8OT6o6BG+U9MkwuJ3U8/CsDHvalRpsxBqivn71ztOFZBTfJMvETbqHiaNSj7Q==
   /@types/minimatch/3.0.3:
     dev: false
     resolution:
@@ -8774,6 +8785,10 @@ packages:
     optional: true
     resolution:
       integrity: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
+  /nanoclone/0.2.1:
+    dev: false
+    resolution:
+      integrity: sha512-wynEP02LmIbLpcYw8uBKpcfF6dmg2vcpKqxeH5UcoKEYdExslsdUA4ugFauuaeYdTB76ez6gJW8XAZ6CgkXYxA==
   /nanoid/3.1.22:
     dev: false
     engines:
@@ -10373,6 +10388,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  /property-expr/2.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-sFPkHQjVKheDNnPvotjQmm3KD3uk1fWKUN7CrpdbwmUx3CrG3QiM8QpTSimvig5vTXmTvjz7+TDvXOI9+4rkcg==
   /proxy-addr/2.0.6:
     dependencies:
       forwarded: 0.1.2
@@ -12351,6 +12370,10 @@ packages:
       node: '>=0.6'
     resolution:
       integrity: sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+  /toposort/2.0.2:
+    dev: false
+    resolution:
+      integrity: sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
   /tough-cookie/2.5.0:
     dependencies:
       psl: 1.8.0
@@ -13449,7 +13472,22 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+  /yup/0.32.9:
+    dependencies:
+      '@babel/runtime': 7.13.10
+      '@types/lodash': 4.14.168
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      nanoclone: 0.2.1
+      property-expr: 2.0.4
+      toposort: 2.0.2
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-Ci1qN+i2H0XpY7syDQ0k5zKQ/DoxO0LzPg8PAR/X4Mpj6DqaeCoIYEEjDJwhArh3Fa7GWbQQVDZKeXYlSH4JMg==
 specifiers:
+  '@carbon/colors': ^10.22.0
   '@carbon/icons-react': ^10.28.0
   '@carbon/themes': ^10.30.0
   '@emotion/babel-plugin': ^11.2.0
@@ -13461,6 +13499,7 @@ specifiers:
   '@testing-library/react': ^11.2.5
   '@testing-library/user-event': ^12.8.3
   '@types/carbon-components-react': ^7.30.0
+  '@types/carbon__colors': ^0.0.1
   '@types/carbon__icons-react': ^10.24.0
   '@types/jest': ^26.0.21
   '@types/node': ^12.20.6
@@ -13492,3 +13531,4 @@ specifiers:
   workbox-routing: ^5.1.4
   workbox-strategies: ^5.1.4
   workbox-streams: ^5.1.4
+  yup: ^0.32.9
