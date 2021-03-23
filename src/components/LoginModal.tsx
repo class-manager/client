@@ -27,9 +27,7 @@ export function LoginModal() {
 
     const validationSchema: SchemaOf<loginFormValues> = object({
         email: string().email("Must be a valid email").required("Email is required"),
-        password: string()
-            .min(8, "Password must be at least 8 characters")
-            .required("Password is required"),
+        password: string().required("Password is required"),
     });
 
     const formik = useFormik<loginFormValues>({
@@ -55,7 +53,7 @@ export function LoginModal() {
             primaryButtonDisabled={!formik.isValid || formik.isSubmitting}
             onRequestSubmit={() => formik.handleSubmit()}
         >
-            {formik.isSubmitting && <Loading description="One moment" withOverlay={true} />}
+            {formik.isSubmitting && <Loading description="One moment" withOverlay={true} small />}
             <Form
                 id="login-form"
                 onSubmit={formik.handleSubmit}
@@ -78,7 +76,7 @@ export function LoginModal() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    invalid={!!formik.errors.email}
+                    invalid={!!formik.errors.email && formik.touched.email}
                     invalidText={formik.errors.email}
                     disabled={formik.isSubmitting}
                     form="login-form"
@@ -93,7 +91,7 @@ export function LoginModal() {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    invalid={!!formik.errors.password && formik.touched.email}
+                    invalid={!!formik.errors.password && formik.touched.password}
                     invalidText={formik.errors.password}
                     disabled={formik.isSubmitting}
                     form="login-form"
@@ -110,8 +108,8 @@ export function LoginModal() {
                         },
                     }}
                     onClick={() => {
-                        setLoginModalOpen(false);
                         setRegistrationModalOpen(true);
+                        setLoginModalOpen(false);
                     }}
                 >
                     register?
