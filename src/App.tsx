@@ -4,12 +4,33 @@ import { AccountCircleRounded } from "@material-ui/icons";
 import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-components-react";
 import React from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { useEffectOnce } from "react-use";
 import { useRecoilState } from "recoil";
 import { HomePage } from "./components/HomePage";
 import { LoginModalState } from "./components/LoginModal";
+import { AccessTokenState } from "./lib/auth";
 
 function App() {
     const [, setLoginModalOpen] = useRecoilState(LoginModalState);
+    const [, setToken] = useRecoilState(AccessTokenState);
+
+    useEffectOnce(() => {
+        async function getToken() {
+            // Call the refresh endpoint to determine if there is a valid cookie
+            try {
+                const result = await fetch("https://classman.xyz/api/v1/auth/reauth", {
+                    method: "POST",
+                });
+
+                if (result.ok) {
+                    const data: { token: string } = await result.json();
+                    setToken(data.token);
+                }
+            } catch (error) {}
+        }
+
+        getToken();
+    });
 
     return (
         <>
