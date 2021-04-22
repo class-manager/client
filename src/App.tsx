@@ -1,16 +1,31 @@
 /** @jsxImportSource @emotion/react */
-import { Global } from "@emotion/react";
-import { AccountCircleRounded } from "@material-ui/icons";
-import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-components-react";
+import { css, Global } from "@emotion/react";
 import React from "react";
-import { Link, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { useEffectOnce } from "react-use";
 import { useRecoilState, useRecoilValue } from "recoil";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { LoginModalState } from "./components/LoginModal";
-import { AccessTokenState, IsLoggedIn, loginState, logout } from "./lib/auth";
+import PageHeader from "./components/scaffold/Header";
+import { AccessTokenState, IsLoggedIn, loginState } from "./lib/auth";
 import { DashboardPage } from "./pages/DashboardPage";
 import { HomePage } from "./pages/HomePage";
+
+const globalStyles = css({
+    "*": {
+        boxSizing: "border-box",
+    },
+    html: {
+        height: "100%",
+    },
+    body: {
+        height: "100%",
+    },
+    "#root": {
+        height: "100%",
+        fontFamily: "Inter, sans-serif",
+    },
+});
 
 function App() {
     const [, setLoginModalOpen] = useRecoilState(LoginModalState);
@@ -18,10 +33,9 @@ function App() {
     const loggedIn = useRecoilValue(IsLoggedIn);
 
     useEffectOnce(() => {
-        if (loggedIn === loginState.NotLoggedIn) {
+        if (loggedIn !== loginState.LoggedIn) {
             setLoginModalOpen(true);
         }
-
         async function getToken() {
             // Call the refresh endpoint to determine if there is a valid cookie
             try {
@@ -44,53 +58,8 @@ function App() {
 
     return (
         <>
-            <Global
-                styles={{
-                    "*": {
-                        boxSizing: "border-box",
-                    },
-                    html: {
-                        height: "100%",
-                    },
-                    body: {
-                        height: "100%",
-                    },
-                    "#root": {
-                        height: "100%",
-                        fontFamily: "Inter, sans-serif",
-                    },
-                }}
-            />
-            <Header aria-label="Header">
-                <Link to="/" css={{ textDecoration: "none" }}>
-                    <HeaderName prefix="">Classman</HeaderName>
-                </Link>
-                <HeaderGlobalBar>
-                    {/* <Link to="/login"> */}
-                    {loggedIn === loginState.NotLoggedIn && (
-                        <HeaderGlobalAction
-                            tooltipAlignment="end"
-                            aria-label="Login"
-                            onClick={() => setLoginModalOpen(true)}
-                        >
-                            <AccountCircleRounded />
-                        </HeaderGlobalAction>
-                    )}
-                    {loggedIn === loginState.LoggedIn && (
-                        <HeaderGlobalAction
-                            tooltipAlignment="end"
-                            aria-label="Logout"
-                            onClick={() => {
-                                setToken(null);
-                                logout();
-                            }}
-                        >
-                            <AccountCircleRounded />
-                        </HeaderGlobalAction>
-                    )}
-                    {/* </Link> */}
-                </HeaderGlobalBar>
-            </Header>
+            <Global styles={globalStyles} />
+            <PageHeader />;
             <main
                 css={{
                     paddingTop: 48,
@@ -99,7 +68,6 @@ function App() {
             >
                 <Switch>
                     <Route path="/" exact component={HomePage} />
-                    <Route path="/login" component={HomePage} />
                     <ProtectedRoute path="/dashboard" component={DashboardPage} />
                     <Route>
                         <Redirect to="/" />
