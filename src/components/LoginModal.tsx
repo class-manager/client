@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { blue60 } from "@carbon/colors";
-import { Form, Loading, Modal, TextInput } from "carbon-components-react";
+import { Form, InlineNotification, Loading, Modal, TextInput } from "carbon-components-react";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
+import queryString from "query-string";
+import { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import { object, SchemaOf, string } from "yup";
 import { AccessTokenState } from "../lib/auth";
@@ -20,9 +22,11 @@ interface loginFormValues {
 
 export function LoginModal() {
     const [loginModalOpen, setLoginModalOpen] = useRecoilState(LoginModalState);
+    const [hasFailed, setHasFailed] = useState(false);
     const [, setRegistrationModalOpen] = useRecoilState(RegistrationModalState);
     const [, setToken] = useRecoilState(AccessTokenState);
     const history = useHistory();
+    const location = useLocation();
 
     const initialValues: loginFormValues = {
         email: "",
@@ -53,11 +57,19 @@ export function LoginModal() {
                 if (result.ok) {
                     const data: { token: string } = await result.json();
                     setToken(data.token);
-                    history.replace("/dashboard");
+
+                    // Determine if there is a continue url
+                    const continueURL = queryString.parse(location.search).to as string | undefined;
+                    if (continueURL) {
+                        history.replace(continueURL);
+                    } else {
+                        history.replace("/dashboard");
+                    }
                 }
             } catch (error) {
             } finally {
                 actions.setSubmitting(false);
+                setHasFailed(true);
             }
         },
         validationSchema,
@@ -88,6 +100,13 @@ export function LoginModal() {
                     },
                 }}
             >
+                {hasFailed && (
+                    <InlineNotification
+                        kind="error"
+                        title="Invalid credentials. Please try again."
+                        onCloseButtonClick={() => setHasFailed(false)}
+                    />
+                )}
                 <TextInput
                     data-modal-primary-focus
                     placeholder="example@email.com"

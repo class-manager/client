@@ -26,6 +26,7 @@ specifiers:
   carbon-icons: ^7.0.7
   formik: ^2.2.6
   jsonwebtoken: ^8.5.1
+  query-string: ^7.0.0
   react: ^17.0.1
   react-dom: ^17.0.1
   react-helmet: ^6.1.0
@@ -75,6 +76,7 @@ dependencies:
   carbon-icons: 7.0.7
   formik: 2.2.6_react@17.0.1
   jsonwebtoken: 8.5.1
+  query-string: 7.0.0
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
   react-helmet: 6.1.0_react@17.0.1
@@ -5929,6 +5931,11 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
+  /filter-obj/1.1.0:
+    resolution: {integrity: sha1-mzERErxsYSehbgFsbF1/GeCAXFs=}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /finalhandler/1.1.2:
     resolution: {integrity: sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==}
     engines: {node: '>= 0.8'}
@@ -10216,6 +10223,16 @@ packages:
       strict-uri-encode: 1.1.0
     dev: false
 
+  /query-string/7.0.0:
+    resolution: {integrity: sha512-Iy7moLybliR5ZgrK/1R3vjrXq03S13Vz4Rbm5Jg3EFq1LUmQppto0qtXz4vqZ386MSRjZgnTSZ9QC+NZOSd/XA==}
+    engines: {node: '>=6'}
+    dependencies:
+      decode-uri-component: 0.2.0
+      filter-obj: 1.1.0
+      split-on-first: 1.1.0
+      strict-uri-encode: 2.0.0
+    dev: false
+
   /querystring-es3/0.2.1:
     resolution: {integrity: sha1-nsYfeQSYdXB9aUFFlv2Qek1xHnM=}
     engines: {node: '>=0.4.x'}
@@ -11513,6 +11530,11 @@ packages:
       - supports-color
     dev: false
 
+  /split-on-first/1.1.0:
+    resolution: {integrity: sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==}
+    engines: {node: '>=6'}
+    dev: false
+
   /split-string/3.1.0:
     resolution: {integrity: sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw==}
     engines: {node: '>=0.10.0'}
@@ -11642,6 +11664,11 @@ packages:
   /strict-uri-encode/1.1.0:
     resolution: {integrity: sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /strict-uri-encode/2.0.0:
+    resolution: {integrity: sha1-ucczDHBChi9rFC3CdLvMWGbONUY=}
+    engines: {node: '>=4'}
     dev: false
 
   /string-length/4.0.2:

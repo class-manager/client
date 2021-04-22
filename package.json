@@ -27,6 +27,7 @@
         "carbon-icons": "^7.0.7",
         "formik": "^2.2.6",
         "jsonwebtoken": "^8.5.1",
+        "query-string": "^7.0.0",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-helmet": "^6.1.0",
