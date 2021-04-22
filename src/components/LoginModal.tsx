@@ -65,11 +65,13 @@ export function LoginModal() {
                     } else {
                         history.replace("/dashboard");
                     }
+                } else {
+                    setHasFailed(true);
                 }
             } catch (error) {
+                setHasFailed(true);
             } finally {
                 actions.setSubmitting(false);
-                setHasFailed(true);
             }
         },
         validationSchema,

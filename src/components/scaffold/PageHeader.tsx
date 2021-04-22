@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { AccountCircleRounded } from "@material-ui/icons";
+import { AccountCircleRounded, ExitToAppRounded } from "@material-ui/icons";
 import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-components-react";
 import * as React from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function PageHeader() {
                             logout();
                         }}
                     >
-                        <AccountCircleRounded />
+                        <ExitToAppRounded />
                     </HeaderGlobalAction>
                 )}
                 {/* </Link> */}
