@@ -2,8 +2,10 @@
 import { blue60 } from "@carbon/colors";
 import { Form, Loading, Modal, TextInput } from "carbon-components-react";
 import { useFormik } from "formik";
+import { useHistory } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import { object, SchemaOf, string } from "yup";
+import { AccessTokenState } from "../lib/auth";
 import { RegistrationModalState } from "./RegistrationModal";
 
 export const LoginModalState = atom<boolean>({
@@ -19,6 +21,8 @@ interface loginFormValues {
 export function LoginModal() {
     const [loginModalOpen, setLoginModalOpen] = useRecoilState(LoginModalState);
     const [, setRegistrationModalOpen] = useRecoilState(RegistrationModalState);
+    const [, setToken] = useRecoilState(AccessTokenState);
+    const history = useHistory();
 
     const initialValues: loginFormValues = {
         email: "",
@@ -32,11 +36,29 @@ export function LoginModal() {
 
     const formik = useFormik<loginFormValues>({
         initialValues: initialValues,
-        onSubmit: (values, actions) => {
-            console.log({ values, actions });
-            setTimeout(() => {
+        onSubmit: async (values, actions) => {
+            try {
+                const result = await fetch("https://classman.xyz/api/v1/auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: values.email,
+                        password: values.password,
+                    }),
+                    credentials: "include",
+                });
+
+                if (result.ok) {
+                    const data: { token: string } = await result.json();
+                    setToken(data.token);
+                    history.replace("/dashboard");
+                }
+            } catch (error) {
+            } finally {
                 actions.setSubmitting(false);
-            }, 5000);
+            }
         },
         validationSchema,
     });

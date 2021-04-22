@@ -1,13 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
-import { LoginModal } from "./LoginModal";
-import { RegistrationModal } from "./RegistrationModal";
+import { Redirect } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { LoginModal } from "../components/LoginModal";
+import { RegistrationModal } from "../components/RegistrationModal";
+import { IsLoggedIn, loginState } from "../lib/auth";
 
 export function HomePage() {
+    const loggedIn = useRecoilValue(IsLoggedIn);
+
     return (
         <>
             <RegistrationModal />
             <LoginModal />
+            {loggedIn === loginState.LoggedIn && <Redirect to="/dashboard" />}
             <div
                 css={{
                     height: "100%",

@@ -5,26 +5,36 @@ import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-
 import React from "react";
 import { Link, Redirect, Route, Switch } from "react-router-dom";
 import { useEffectOnce } from "react-use";
-import { useRecoilState } from "recoil";
-import { HomePage } from "./components/HomePage";
+import { useRecoilState, useRecoilValue } from "recoil";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { LoginModalState } from "./components/LoginModal";
-import { AccessTokenState } from "./lib/auth";
+import { AccessTokenState, IsLoggedIn, loginState, logout } from "./lib/auth";
+import { DashboardPage } from "./pages/DashboardPage";
+import { HomePage } from "./pages/HomePage";
 
 function App() {
     const [, setLoginModalOpen] = useRecoilState(LoginModalState);
     const [, setToken] = useRecoilState(AccessTokenState);
+    const loggedIn = useRecoilValue(IsLoggedIn);
 
     useEffectOnce(() => {
+        if (loggedIn === loginState.NotLoggedIn) {
+            setLoginModalOpen(true);
+        }
+
         async function getToken() {
             // Call the refresh endpoint to determine if there is a valid cookie
             try {
                 const result = await fetch("https://classman.xyz/api/v1/auth/reauth", {
                     method: "POST",
+                    credentials: "include",
                 });
 
                 if (result.ok) {
                     const data: { token: string } = await result.json();
                     setToken(data.token);
+                } else {
+                    setToken(null);
                 }
             } catch (error) {}
         }
@@ -57,13 +67,27 @@ function App() {
                 </Link>
                 <HeaderGlobalBar>
                     {/* <Link to="/login"> */}
-                    <HeaderGlobalAction
-                        tooltipAlignment="end"
-                        aria-label="Login"
-                        onClick={() => setLoginModalOpen(true)}
-                    >
-                        <AccountCircleRounded />
-                    </HeaderGlobalAction>
+                    {loggedIn === loginState.NotLoggedIn && (
+                        <HeaderGlobalAction
+                            tooltipAlignment="end"
+                            aria-label="Login"
+                            onClick={() => setLoginModalOpen(true)}
+                        >
+                            <AccountCircleRounded />
+                        </HeaderGlobalAction>
+                    )}
+                    {loggedIn === loginState.LoggedIn && (
+                        <HeaderGlobalAction
+                            tooltipAlignment="end"
+                            aria-label="Logout"
+                            onClick={() => {
+                                setToken(null);
+                                logout();
+                            }}
+                        >
+                            <AccountCircleRounded />
+                        </HeaderGlobalAction>
+                    )}
                     {/* </Link> */}
                 </HeaderGlobalBar>
             </Header>
@@ -75,9 +99,8 @@ function App() {
             >
                 <Switch>
                     <Route path="/" exact component={HomePage} />
-                    <Route path="/login">
-                        <h1>This is the login screen</h1>
-                    </Route>
+                    <Route path="/login" component={HomePage} />
+                    <ProtectedRoute path="/dashboard" component={DashboardPage} />
                     <Route>
                         <Redirect to="/" />
                     </Route>
