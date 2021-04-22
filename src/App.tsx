@@ -6,7 +6,7 @@ import { useEffectOnce } from "react-use";
 import { useRecoilState, useRecoilValue } from "recoil";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { LoginModalState } from "./components/LoginModal";
-import PageHeader from "./components/scaffold/Header";
+import PageHeader from "./components/scaffold/PageHeader";
 import { AccessTokenState, IsLoggedIn, loginState } from "./lib/auth";
 import { DashboardPage } from "./pages/DashboardPage";
 import { HomePage } from "./pages/HomePage";
@@ -59,7 +59,7 @@ function App() {
     return (
         <>
             <Global styles={globalStyles} />
-            <PageHeader />;
+            <PageHeader />
             <main
                 css={{
                     paddingTop: 48,
