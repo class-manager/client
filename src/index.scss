@@ -11,10 +11,10 @@ $feature-flags: (
 @import "~carbon-components/scss/globals/scss/css--helpers";
 @import "~carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins";
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        @include carbon--theme($carbon--theme--g90, true);
-    }
-}
+// @media (prefers-color-scheme: dark) {
+//     :root {
+//         @include carbon--theme($carbon--theme--g90, true);
+//     }
+// }
 
 @import "~carbon-components/scss/globals/scss/styles.scss";
