@@ -8,6 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { LoginModalState } from "./components/LoginModal";
 import PageHeader from "./components/scaffold/PageHeader";
 import { AccessTokenState, IsLoggedIn, loginState } from "./lib/auth";
+import { ClassPage } from "./pages/ClassPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { HomePage } from "./pages/HomePage";
 
@@ -69,6 +70,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={HomePage} />
                     <ProtectedRoute path="/dashboard" component={DashboardPage} />
+                    <ProtectedRoute path="/class/:id" component={ClassPage} />
                     <Route>
                         <Redirect to="/" />
                     </Route>

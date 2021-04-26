@@ -25,8 +25,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ id, name, classNameString }) => {
             }}
             onClick={() => history.push(`/task/${id}`)}
         >
-            <h3 css={{ fontWeight: 600 }}>{classNameString}</h3>
-            <h5>{name}</h5>
+            <h3 css={{ fontWeight: 600 }}>{name}</h3>
+            <h5>{classNameString}</h5>
         </div>
     );
 };
