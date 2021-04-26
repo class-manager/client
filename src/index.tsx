@@ -1,19 +1,26 @@
 import "@fontsource/inter";
 import React from "react";
 import ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import App from "./App";
 import "./index.scss";
+import { RecoilExternalStatePortal } from "./lib/recoilUtil";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
     <React.StrictMode>
         <RecoilRoot>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
+            <RecoilExternalStatePortal />
+            <QueryClientProvider client={queryClient}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </QueryClientProvider>
         </RecoilRoot>
     </React.StrictMode>,
     document.getElementById("root")
