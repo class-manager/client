@@ -10,7 +10,10 @@ import { RecoilExternalStatePortal } from "./lib/recoilUtil";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-const queryClient = new QueryClient();
+// Set cacheTime to zero to always refetch on remount
+const queryClient = new QueryClient({
+    defaultOptions: { queries: { cacheTime: 0, refetchOnWindowFocus: false } },
+});
 
 ReactDOM.render(
     <React.StrictMode>

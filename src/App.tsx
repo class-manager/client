@@ -21,6 +21,7 @@ const globalStyles = css({
     },
     body: {
         height: "100%",
+        backgroundColor: "#FCFCFC",
     },
     "#root": {
         height: "100%",

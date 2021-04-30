@@ -1,22 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { Loading } from "carbon-components-react";
 import * as React from "react";
 import { useQuery } from "react-query";
 import ClassCard from "../components/dashboard/ClassCard";
 import TaskCard from "../components/dashboard/TaskCard";
-import H1 from "../components/text/H1";
+import { CardSection } from "../components/scaffold/CardSection";
 import { makeAuthenticatedRequest } from "../lib/api";
-
-const listBackgroundStyles = css({
-    backgroundColor: "white",
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "1rem",
-});
 
 export function DashboardPage() {
     const classesQuery = useQuery(
@@ -36,7 +25,7 @@ export function DashboardPage() {
                 }[];
             };
         },
-        { refetchOnWindowFocus: false }
+        { refetchInterval: 5000 }
     );
 
     return (
@@ -56,29 +45,18 @@ export function DashboardPage() {
             }}
         >
             {classesQuery.isLoading && <Loading withOverlay />}
-            <section>
-                <H1>Classes</H1>
-                <div css={listBackgroundStyles}>
-                    {classesQuery.data &&
-                        classesQuery.data.classes.map((c) => (
-                            <ClassCard key={c.id} id={c.id} name={c.name} subject={c.subject} />
-                        ))}
-                </div>
-            </section>
-            <section>
-                <H1>Tasks</H1>
-                <div css={listBackgroundStyles}>
-                    {classesQuery.data &&
-                        classesQuery.data.tasks.map((t) => (
-                            <TaskCard
-                                key={t.id}
-                                id={t.id}
-                                name={t.name}
-                                classNameString={t.class}
-                            />
-                        ))}
-                </div>
-            </section>
+            <CardSection header="Classes">
+                {classesQuery.data &&
+                    classesQuery.data.classes.map((c) => (
+                        <ClassCard key={c.id} id={c.id} name={c.name} subject={c.subject} />
+                    ))}
+            </CardSection>
+            <CardSection header="Tasks">
+                {classesQuery.data &&
+                    classesQuery.data.tasks.map((t) => (
+                        <TaskCard key={t.id} id={t.id} name={t.name} classNameString={t.class} />
+                    ))}
+            </CardSection>
         </div>
     );
 }
