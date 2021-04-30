@@ -16,11 +16,12 @@ export async function makeAuthenticatedRequest(method: HTTPMethod, path: string,
     if (res.status === 403) {
         // Session expired, try refresh
         const { success, token } = await refreshToken();
-        if (!success) {
+        if (!success || !token) {
             setRecoilExternalState(AccessTokenState, null);
             throw new Error("Failed to authenticate, please log in again.");
         }
 
+        setRecoilExternalState(AccessTokenState, token);
         return await makeRequest({ jwt: token, method, path, body });
     }
 
