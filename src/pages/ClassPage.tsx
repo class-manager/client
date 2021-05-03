@@ -4,6 +4,7 @@ import * as React from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import BaseCard from "../components/cards/BaseCard";
+import NewItemCard from "../components/cards/NewItemCard";
 import { CardSection } from "../components/scaffold/CardSection";
 import H1 from "../components/text/H1";
 import { makeAuthenticatedRequest } from "../lib/api";
@@ -72,6 +73,7 @@ export function ClassPage() {
                             linkTo={`/lesson/${l.id}`}
                         />
                     ))}
+                    <NewItemCard message="Create Lesson" onClick={() => {}} />
                 </CardSection>
                 <CardSection header="Tasks">
                     {tasks.map((t) => (
@@ -82,11 +84,13 @@ export function ClassPage() {
                             linkTo={`/task/${t.id}`}
                         />
                     ))}
+                    <NewItemCard message="Create Task" onClick={() => {}} />
                 </CardSection>
                 <CardSection header="Students">
                     {students.map((s) => (
                         <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
                     ))}
+                    <NewItemCard message="Add Student" onClick={() => {}} />
                 </CardSection>
             </div>
         </div>
