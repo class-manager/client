@@ -9,7 +9,6 @@ export interface H2Props {
 const h2Style = css({
     fontWeight: 600,
     letterSpacing: "-0.05rem",
-    marginBottom: ".25rem",
     color: "#000",
 });
 
