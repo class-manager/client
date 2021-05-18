@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
+import { DeleteForeverRounded } from "@material-ui/icons";
 import { Loading } from "carbon-components-react";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
+import DeleteClassModal from "../components/modals/DeleteClassModal";
 import { CardSection } from "../components/scaffold/CardSection";
 import H1 from "../components/text/H1";
 import { makeAuthenticatedRequest } from "../lib/api";
@@ -43,6 +45,7 @@ export function ClassPage() {
         },
         { refetchOnWindowFocus: false }
     );
+    const [closeModalOpen, setCloseModalOpen] = React.useState(false);
 
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
@@ -52,7 +55,21 @@ export function ClassPage() {
 
     return (
         <div css={{ margin: "1rem" }}>
-            <H1>{name}</H1>
+            <DeleteClassModal
+                className={name}
+                handleRequestClose={() => setCloseModalOpen(false)}
+                id={id}
+                open={closeModalOpen}
+                subject={subject}
+            />
+            <H1>
+                {name}{" "}
+                <DeleteForeverRounded
+                    onClick={() => setCloseModalOpen(true)}
+                    color="disabled"
+                    css={{ cursor: "pointer" }}
+                />
+            </H1>
             <h3>{subject}</h3>
             <div
                 css={{
