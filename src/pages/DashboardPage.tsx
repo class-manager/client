@@ -2,12 +2,17 @@
 import { Loading } from "carbon-components-react";
 import * as React from "react";
 import { useQuery } from "react-query";
+import { useRecoilState } from "recoil";
+import NewItemCard from "../components/cards/NewItemCard";
 import ClassCard from "../components/dashboard/ClassCard";
 import TaskCard from "../components/dashboard/TaskCard";
+import CreateClassModal, { CreateClassModalState } from "../components/modals/CreateClassModal";
 import { CardSection } from "../components/scaffold/CardSection";
 import { makeAuthenticatedRequest } from "../lib/api";
 
 export function DashboardPage() {
+    const [, setCreateClassModalOpen] = useRecoilState(CreateClassModalState);
+
     const classesQuery = useQuery("dashboard-classes", async function () {
         const res = await makeAuthenticatedRequest("GET", "/dashboard");
         return (await res.json()) as {
@@ -46,6 +51,7 @@ export function DashboardPage() {
                     classesQuery.data.classes.map((c) => (
                         <ClassCard key={c.id} id={c.id} name={c.name} subject={c.subject} />
                     ))}
+                <NewItemCard message="Create Class" onClick={() => setCreateClassModalOpen(true)} />
             </CardSection>
             <CardSection header="Tasks">
                 {classesQuery.data &&
@@ -53,6 +59,7 @@ export function DashboardPage() {
                         <TaskCard key={t.id} id={t.id} name={t.name} classNameString={t.class} />
                     ))}
             </CardSection>
+            <CreateClassModal />
         </div>
     );
 }
