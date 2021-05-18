@@ -8,25 +8,21 @@ import { CardSection } from "../components/scaffold/CardSection";
 import { makeAuthenticatedRequest } from "../lib/api";
 
 export function DashboardPage() {
-    const classesQuery = useQuery(
-        "dashboard-classes",
-        async function () {
-            const res = await makeAuthenticatedRequest("GET", "/dashboard");
-            return (await res.json()) as {
-                classes: {
-                    id: string;
-                    name: string;
-                    subject: string;
-                }[];
-                tasks: {
-                    id: string;
-                    name: string;
-                    class: string;
-                }[];
-            };
-        },
-        { refetchInterval: 5000 }
-    );
+    const classesQuery = useQuery("dashboard-classes", async function () {
+        const res = await makeAuthenticatedRequest("GET", "/dashboard");
+        return (await res.json()) as {
+            classes: {
+                id: string;
+                name: string;
+                subject: string;
+            }[];
+            tasks: {
+                id: string;
+                name: string;
+                class: string;
+            }[];
+        };
+    });
 
     return (
         <div
