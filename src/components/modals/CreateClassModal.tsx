@@ -81,7 +81,7 @@ const CreateClassModal: React.FC<CreateClassModalProps> = () => {
                         data-modal-primary-focus
                         id="text-input-1"
                         labelText="Class Name"
-                        placeholder="e.g. Biology 1"
+                        placeholder="e.g. Class 1"
                         // style={{ paddingBottom: "1rem" }}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
