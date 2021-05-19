@@ -1,4 +1,5 @@
 import { HTTPMethod } from "workbox-routing/utils/constants";
+import { domain } from "..";
 import { AccessTokenState } from "./auth";
 import { getRecoilExternalLoadable, setRecoilExternalState } from "./recoilUtil";
 
@@ -39,7 +40,7 @@ function makeRequest({
     jwt?: string | null;
     body?: any;
 }) {
-    return fetch(`https://classman.xyz/api/v1${path}`, {
+    return fetch(`${domain}/api/v1${path}`, {
         method,
         body: JSON.stringify(body),
         credentials: "include",
@@ -52,7 +53,7 @@ function makeRequest({
 
 async function refreshToken(): Promise<{ success: boolean; token?: string }> {
     try {
-        const res = await fetch("https://classman.xyz/api/v1/auth/reauth", {
+        const res = await fetch(`${domain}/api/v1/auth/reauth`, {
             method: "POST",
             credentials: "include",
         });

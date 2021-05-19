@@ -4,6 +4,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { useEffectOnce } from "react-use";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { domain } from ".";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { LoginModalState } from "./components/LoginModal";
 import PageHeader from "./components/scaffold/PageHeader";
@@ -41,7 +42,7 @@ function App() {
         async function getToken() {
             // Call the refresh endpoint to determine if there is a valid cookie
             try {
-                const result = await fetch("https://classman.xyz/api/v1/auth/reauth", {
+                const result = await fetch(`${domain}/api/v1/auth/reauth`, {
                     method: "POST",
                     credentials: "include",
                 });

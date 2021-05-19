@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { atom, selector } from "recoil";
+import { domain } from "..";
 
 export enum loginState {
     Checking,
@@ -35,7 +36,7 @@ export const UID = selector({
 
 export async function logout() {
     try {
-        await fetch("https://classman.xyz/api/v1/auth/logout", {
+        await fetch(`${domain}/api/v1/auth/logout`, {
             method: "POST",
             credentials: "include",
         });

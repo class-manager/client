@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import { object, SchemaOf, string } from "yup";
+import { domain } from "..";
 import { AccessTokenState } from "../lib/auth";
 import { RegistrationModalState } from "./RegistrationModal";
 
@@ -42,7 +43,7 @@ export function LoginModal() {
         initialValues: initialValues,
         onSubmit: async (values, actions) => {
             try {
-                const result = await fetch("https://classman.xyz/api/v1/auth/login", {
+                const result = await fetch(`${domain}/api/v1/auth/login`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

@@ -10,6 +10,9 @@ import { RecoilExternalStatePortal } from "./lib/recoilUtil";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
+export const domain = "http://localhost:3001";
+// const domain = "https://classman.xyz"
+
 // Set cacheTime to zero to always refetch on remount
 const queryClient = new QueryClient({
     defaultOptions: { queries: { cacheTime: 0, refetchOnWindowFocus: false } },
