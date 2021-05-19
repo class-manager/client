@@ -54,9 +54,6 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ classID }) => {
         validationSchema,
         onSubmit: async (values, actions) => {
             try {
-                console.log(values);
-                console.log(JSON.stringify(values));
-
                 const res = await makeAuthenticatedRequest(
                     "POST",
                     `/classes/${classID}/tasks`,
