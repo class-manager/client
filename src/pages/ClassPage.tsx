@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { DeleteForeverRounded } from "@material-ui/icons";
 import { Loading } from "carbon-components-react";
+import { DateTime } from "luxon";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
@@ -101,7 +102,9 @@ export function ClassPage() {
                         <BaseCard
                             key={t.id}
                             header={t.name}
-                            subHeader={t.timestamp}
+                            subHeader={DateTime.fromISO(t.timestamp).toLocaleString(
+                                DateTime.DATETIME_MED
+                            )}
                             linkTo={`/task/${t.id}`}
                         />
                     ))}
