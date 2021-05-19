@@ -4,8 +4,10 @@ import { Loading } from "carbon-components-react";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
+import CreateTaskModal, { CreateTaskModalState } from "../components/modals/CreateTaskModal";
 import DeleteClassModal from "../components/modals/DeleteClassModal";
 import { CardSection } from "../components/scaffold/CardSection";
 import H1 from "../components/text/H1";
@@ -46,6 +48,7 @@ export function ClassPage() {
         { refetchOnWindowFocus: false }
     );
     const [closeModalOpen, setCloseModalOpen] = React.useState(false);
+    const [, setCreateTaskModalOpen] = useRecoilState(CreateTaskModalState);
 
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
@@ -62,6 +65,7 @@ export function ClassPage() {
                 open={closeModalOpen}
                 subject={subject}
             />
+            <CreateTaskModal classID={id} />
             <H1>
                 {name}{" "}
                 <DeleteForeverRounded
@@ -101,7 +105,10 @@ export function ClassPage() {
                             linkTo={`/task/${t.id}`}
                         />
                     ))}
-                    <NewItemCard message="Create Task" onClick={() => {}} />
+                    <NewItemCard
+                        message="Create Task"
+                        onClick={() => setCreateTaskModalOpen(true)}
+                    />
                 </CardSection>
                 <CardSection header="Students">
                     {students.map((s) => (

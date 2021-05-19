@@ -1,4 +1,6 @@
+import LuxonUtils from "@date-io/luxon";
 import "@fontsource/inter";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -10,8 +12,8 @@ import { RecoilExternalStatePortal } from "./lib/recoilUtil";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-// export const domain = "http://localhost:3001";
-export const domain = "https://classman.xyz";
+export const domain = "http://localhost:3001";
+// export const domain = "https://classman.xyz";
 
 // Set cacheTime to zero to always refetch on remount
 const queryClient = new QueryClient({
@@ -24,7 +26,9 @@ ReactDOM.render(
             <RecoilExternalStatePortal />
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
-                    <App />
+                    <MuiPickersUtilsProvider utils={LuxonUtils}>
+                        <App />
+                    </MuiPickersUtilsProvider>
                 </BrowserRouter>
             </QueryClientProvider>
         </RecoilRoot>

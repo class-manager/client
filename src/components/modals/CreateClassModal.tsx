@@ -93,7 +93,6 @@ const CreateClassModal: React.FC<CreateClassModalProps> = () => {
                     />
                 </div>
                 <TextInput
-                    data-modal-primary-focus
                     id="text-input-2"
                     labelText="Subject"
                     placeholder="e.g. Biology"
