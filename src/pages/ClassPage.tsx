@@ -8,6 +8,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
+import CreateLessonModal, { CreateLessonModalState } from "../components/modals/CreateLessonModal";
 import CreateTaskModal, { CreateTaskModalState } from "../components/modals/CreateTaskModal";
 import DeleteClassModal from "../components/modals/DeleteClassModal";
 import { CardSection } from "../components/scaffold/CardSection";
@@ -50,6 +51,7 @@ export function ClassPage() {
     );
     const [closeModalOpen, setCloseModalOpen] = React.useState(false);
     const [, setCreateTaskModalOpen] = useRecoilState(CreateTaskModalState);
+    const [, setCreateLessonModalOpen] = useRecoilState(CreateLessonModalState);
 
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
@@ -67,6 +69,7 @@ export function ClassPage() {
                 subject={subject}
             />
             <CreateTaskModal classID={id} />
+            <CreateLessonModal classID={id} />
             <H1>
                 {name}{" "}
                 <DeleteForeverRounded
@@ -91,11 +94,16 @@ export function ClassPage() {
                         <BaseCard
                             key={l.id}
                             header={l.name}
-                            subHeader={l.timestamp}
+                            subHeader={DateTime.fromISO(l.timestamp).toLocaleString(
+                                DateTime.DATETIME_MED
+                            )}
                             linkTo={`/lesson/${l.id}`}
                         />
                     ))}
-                    <NewItemCard message="Create Lesson" onClick={() => {}} />
+                    <NewItemCard
+                        message="Create Lesson"
+                        onClick={() => setCreateLessonModalOpen(true)}
+                    />
                 </CardSection>
                 <CardSection header="Tasks">
                     {tasks.map((t) => (
