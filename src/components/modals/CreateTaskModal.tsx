@@ -70,6 +70,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ classID }) => {
 
     React.useEffect(() => {
         formik.setFieldValue("dueDate", dueDate);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dueDate]);
 
     return (
