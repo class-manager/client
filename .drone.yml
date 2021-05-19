@@ -8,4 +8,4 @@ steps:
     commands:
       - npm install -g pnpm
       - pnpm install
-      - pnpm build
+      - CI=false pnpm build
