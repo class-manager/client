@@ -14,7 +14,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.11.9
   '@testing-library/react': ^11.2.5
   '@testing-library/user-event': ^12.8.3
-  '@types/carbon-components-react': ^7.30.0
+  '@types/carbon-components-react': ^7.33.0
   '@types/carbon__colors': ^0.0.1
   '@types/carbon__icons-react': ^10.24.0
   '@types/jest': ^26.0.21
@@ -25,7 +25,7 @@ specifiers:
   '@types/react-dom': ^16.9.11
   '@types/react-router-dom': ^5.1.7
   carbon-components: ^10.31.0
-  carbon-components-react: ^7.31.0
+  carbon-components-react: ^7.35.0
   carbon-icons: ^7.0.7
   formik: ^2.2.6
   jsonwebtoken: ^8.5.1
@@ -70,7 +70,7 @@ dependencies:
   '@testing-library/jest-dom': 5.11.9
   '@testing-library/react': 11.2.5_react-dom@17.0.1+react@17.0.1
   '@testing-library/user-event': 12.8.3
-  '@types/carbon-components-react': 7.30.0
+  '@types/carbon-components-react': 7.33.0
   '@types/carbon__colors': 0.0.1
   '@types/carbon__icons-react': 10.24.0
   '@types/jest': 26.0.21
@@ -79,7 +79,7 @@ dependencies:
   '@types/react-dom': 16.9.11
   '@types/react-router-dom': 5.1.7
   carbon-components: 10.31.0
-  carbon-components-react: 7.31.0_70c6d277c7be3881a48bb1d46272679e
+  carbon-components-react: 7.35.0_70c6d277c7be3881a48bb1d46272679e
   carbon-icons: 7.0.7
   formik: 2.2.6_react@17.0.1
   jsonwebtoken: 8.5.1
@@ -1471,12 +1471,16 @@ packages:
     resolution: {integrity: sha512-09QWa1EmoO6VYJhe5Wj2MVJ4wbQY+fKcnVFFJ0DHkc5K4Pw0K6Kt7CoVKgRDl+pzr1gfcdNDCnG8O5F4UQFb3w==}
     dev: false
 
-  /@carbon/feature-flags/0.2.0:
-    resolution: {integrity: sha512-CbHTsC4E17Qg3QibWlTDrkM3hhBUL8NXV6WIFz9gpswyZ+vS00LDJHGGP1xffnPUyOtQVxGe0oz0IGYZgy2C6g==}
+  /@carbon/feature-flags/0.4.0:
+    resolution: {integrity: sha512-yYR+zCjRPIcDzJRQ7BDI69v0/k8ZZr+9tFKAuwRYVeQFBz6Ib+2K1M4ZH/+8voprdYlBQbj81U8RS8P1+AqaJA==}
     dev: false
 
   /@carbon/icon-helpers/10.15.0:
     resolution: {integrity: sha512-TpCvRARVI1XnyuhxM8BgHl3m+HRlUkkef32SC6NGhz2cF99/3EsWAzcPz98JNCojAYYXHjGiEfO6K61z53u+lg==}
+    dev: false
+
+  /@carbon/icon-helpers/10.17.0:
+    resolution: {integrity: sha512-/Tpi+Kz3bCjwS9gTOS+wibstOsEHYsoz67nrGyZ1BbX1fhzaHL++ZgSdkPDbu80KobYcYg6eVBrMh9v1LXFlNQ==}
     dev: false
 
   /@carbon/icons-react/10.28.0_react@17.0.1:
@@ -1487,6 +1491,20 @@ packages:
       '@carbon/icon-helpers': 10.15.0
       prop-types: 15.7.2
       react: 17.0.1
+    dev: false
+
+  /@carbon/icons-react/10.32.0_react@17.0.1:
+    resolution: {integrity: sha512-pTEJDRWZpqp4qwT37KXjeO3iSrnubqVrEad7pvBs+hL6Yqg/dx/Bt0Sxj1xPWA0v9Pd23xO4uAZEwnlRPotQZw==}
+    requiresBuild: true
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      '@carbon/icon-helpers': 10.17.0
+      '@carbon/telemetry': 0.0.0-alpha.6
+      prop-types: 15.7.2
+      react: 17.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@carbon/import-once/10.6.0:
@@ -2393,8 +2411,8 @@ packages:
       '@types/responselike': 1.0.0
     dev: false
 
-  /@types/carbon-components-react/7.30.0:
-    resolution: {integrity: sha512-rI4A/MTTCBXGLvy3OwOJ28FMDHNd+LoNR+KPmxfpE9pHAc74g1LOGz5dZ1fSPW8zZZheY3x/gqq1t0noMPWi9Q==}
+  /@types/carbon-components-react/7.33.0:
+    resolution: {integrity: sha512-YmCd6J/DIdC/JxzZkmFqFO7ytpBq320fNApratGLaGuUdNO37S3Ib+Td6XmbxHyXROnyxwye0uybluiHpKRC7g==}
     dependencies:
       '@types/react': 16.14.5
       flatpickr: 4.6.1
@@ -3987,8 +4005,8 @@ packages:
       rsvp: 4.8.5
     dev: false
 
-  /carbon-components-react/7.31.0_70c6d277c7be3881a48bb1d46272679e:
-    resolution: {integrity: sha512-zVX/x6kmVkQERmye9j9WezefmHavE7zJPzqbzC2C12T6X3gud6y1hq2VGnMauXby/NOaR5aP9Hr51iAfSoi2nQ==}
+  /carbon-components-react/7.35.0_70c6d277c7be3881a48bb1d46272679e:
+    resolution: {integrity: sha512-PS7HBJFJso0oFt3XidViODPowxgPoTPPSKlZnTVQbbsfYZTPZlpYsf7F0pzCyc5HerhNdjNvRd0sVB1AJe8t7Q==}
     requiresBuild: true
     peerDependencies:
       carbon-components: ^10.30.0
@@ -3996,12 +4014,13 @@ packages:
       react: ^16.8.6 || ^17.0.1
       react-dom: ^16.8.6 || ^17.0.1
     dependencies:
-      '@carbon/feature-flags': 0.2.0
-      '@carbon/icons-react': 10.28.0_react@17.0.1
+      '@carbon/feature-flags': 0.4.0
+      '@carbon/icons-react': 10.32.0_react@17.0.1
       '@carbon/telemetry': 0.0.0-alpha.6
       carbon-components: 10.31.0
       carbon-icons: 7.0.7
-      classnames: 2.2.6
+      classnames: 2.3.1
+      copy-to-clipboard: 3.3.1
       downshift: 5.2.1_react@17.0.1
       flatpickr: 4.6.9
       invariant: 2.2.4
@@ -4154,8 +4173,8 @@ packages:
       static-extend: 0.1.2
     dev: false
 
-  /classnames/2.2.6:
-    resolution: {integrity: sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==}
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
     dev: false
 
   /clean-css/4.2.3:

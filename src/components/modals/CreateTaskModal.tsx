@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
-import { Form, Loading, Modal, NumberInput, TextArea, TextInput } from "carbon-components-react";
+import { Form, Loading, Modal, TextArea, TextInput } from "carbon-components-react";
 import { useFormik } from "formik";
 import { DateTime } from "luxon";
 import * as React from "react";
@@ -122,10 +122,11 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ classID }) => {
                 />
             </div>
             <div css={{ marginBottom: "1rem" }}>
-                <NumberInput
+                <TextInput
                     id="input-3"
-                    label="Max Mark"
+                    labelText="Max Mark"
                     placeholder="100"
+                    type="number"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.maxMark}
