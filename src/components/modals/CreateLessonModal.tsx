@@ -64,7 +64,7 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
                 const data = (await res.json()) as { id: string; name: string; class: string };
                 actions.resetForm();
                 setOpen(false);
-                history.push(`class/${classID}/lesson/${data.id}`);
+                history.push(`/class/${classID}/lesson/${data.id}`);
             } catch (error) {}
         },
     });
@@ -97,7 +97,7 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
             <div css={{ marginBottom: "1rem" }}>
                 <TextInput
                     data-modal-primary-focus
-                    id="text-input-1"
+                    id="createlesson-text-input-1"
                     labelText="Lesson Name"
                     placeholder="e.g. Introduction to Data Structures"
                     onChange={formik.handleChange}
@@ -112,7 +112,7 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
             </div>
             <div css={{ marginBottom: "1rem" }}>
                 <TextArea
-                    id="text-input-2"
+                    id="createlesson-text-input-2"
                     labelText="Description (optional)"
                     placeholder="e.g. In this lesson, we will look at..."
                     onChange={formik.handleChange}
