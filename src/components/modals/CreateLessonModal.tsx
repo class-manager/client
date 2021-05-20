@@ -82,7 +82,10 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
             modalHeading="Create Lesson"
             size="sm"
             onRequestClose={() => {
-                if (!formik.isSubmitting) setOpen(false);
+                if (!formik.isSubmitting) {
+                    setOpen(false);
+                    formik.resetForm();
+                }
             }}
             preventCloseOnClickOutside={formik.isSubmitting}
             primaryButtonText="Create Lesson"

@@ -80,7 +80,10 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ classID }) => {
             modalHeading="Create Task"
             size="sm"
             onRequestClose={() => {
-                if (!formik.isSubmitting) setOpen(false);
+                if (!formik.isSubmitting) {
+                    setOpen(false);
+                    formik.resetForm();
+                }
             }}
             preventCloseOnClickOutside={formik.isSubmitting}
             primaryButtonText="Create Task"
