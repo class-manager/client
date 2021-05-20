@@ -64,7 +64,7 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
                 const data = (await res.json()) as { id: string; name: string; class: string };
                 actions.resetForm();
                 setOpen(false);
-                history.push(`/lesson/${data.id}`);
+                history.push(`class/${classID}/lesson/${data.id}`);
             } catch (error) {}
         },
     });

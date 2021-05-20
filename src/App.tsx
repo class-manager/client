@@ -12,6 +12,7 @@ import { AccessTokenState, IsLoggedIn, loginState } from "./lib/auth";
 import { ClassPage } from "./pages/ClassPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { HomePage } from "./pages/HomePage";
+import { LessonPage } from "./pages/LessonPage";
 
 const globalStyles = css({
     "*": {
@@ -72,6 +73,10 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={HomePage} />
                     <ProtectedRoute path="/dashboard" component={DashboardPage} />
+                    <ProtectedRoute
+                        path="/class/:classID/lesson/:lessonID"
+                        component={LessonPage}
+                    />
                     <ProtectedRoute path="/class/:id" component={ClassPage} />
                     <Route>
                         <Redirect to="/" />
