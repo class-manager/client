@@ -24,7 +24,11 @@ export function DashboardPage() {
             tasks: {
                 id: string;
                 name: string;
-                class: string;
+                class: {
+                    id: string;
+                    name: string;
+                    subject: string;
+                };
             }[];
         };
     });
@@ -56,7 +60,12 @@ export function DashboardPage() {
             <CardSection header="Tasks">
                 {classesQuery.data &&
                     classesQuery.data.tasks.map((t) => (
-                        <TaskCard key={t.id} id={t.id} name={t.name} classNameString={t.class} />
+                        <TaskCard
+                            key={t.id}
+                            id={t.id}
+                            name={t.name}
+                            classNameString={`${t.class.name} - ${t.class.subject}`}
+                        />
                     ))}
             </CardSection>
             <CreateClassModal />
