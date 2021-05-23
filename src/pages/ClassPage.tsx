@@ -11,6 +11,9 @@ import NewItemCard from "../components/cards/NewItemCard";
 import CreateLessonModal, { CreateLessonModalState } from "../components/modals/CreateLessonModal";
 import CreateTaskModal, { CreateTaskModalState } from "../components/modals/CreateTaskModal";
 import DeleteClassModal from "../components/modals/DeleteClassModal";
+import RemoveStudentsModal, {
+    DeleteStudentsModalState,
+} from "../components/modals/RemoveStudentsModal";
 import { CardSection } from "../components/scaffold/CardSection";
 import H1 from "../components/text/H1";
 import { makeAuthenticatedRequest } from "../lib/api";
@@ -52,6 +55,7 @@ export function ClassPage() {
     const [closeModalOpen, setCloseModalOpen] = React.useState(false);
     const [, setCreateTaskModalOpen] = useRecoilState(CreateTaskModalState);
     const [, setCreateLessonModalOpen] = useRecoilState(CreateLessonModalState);
+    const [, setDeleteStudentsModalOpen] = useRecoilState(DeleteStudentsModalState);
 
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
@@ -71,6 +75,7 @@ export function ClassPage() {
             />
             <CreateTaskModal classID={id} />
             <CreateLessonModal classID={id} />
+            <RemoveStudentsModal classID={id} students={students} query={classesQuery} />
             <H1>
                 {name}{" "}
                 <DeleteForeverRounded
@@ -124,7 +129,15 @@ export function ClassPage() {
                 </CardSection>
                 <CardSection
                     header="Students"
-                    Icon={<DeleteForeverRounded color="disabled" css={{ cursor: "pointer" }} />}
+                    Icon={
+                        students.length > 0 ? (
+                            <DeleteForeverRounded
+                                color="disabled"
+                                css={{ cursor: "pointer" }}
+                                onClick={() => setDeleteStudentsModalOpen(true)}
+                            />
+                        ) : undefined
+                    }
                 >
                     {students.map((s) => (
                         <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
