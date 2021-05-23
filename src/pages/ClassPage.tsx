@@ -122,7 +122,10 @@ export function ClassPage() {
                         onClick={() => setCreateTaskModalOpen(true)}
                     />
                 </CardSection>
-                <CardSection header="Students">
+                <CardSection
+                    header="Students"
+                    Icon={<DeleteForeverRounded color="disabled" css={{ cursor: "pointer" }} />}
+                >
                     {students.map((s) => (
                         <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
                     ))}

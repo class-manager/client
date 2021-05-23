@@ -4,9 +4,10 @@ import H2 from "../text/H2";
 
 export interface CardSectionProps {
     header: string;
+    Icon?: React.ReactNode;
 }
 
-export const CardSection: React.FC<CardSectionProps> = ({ header, children }) => {
+export const CardSection: React.FC<CardSectionProps> = ({ header, children, Icon }) => {
     return (
         <section
             css={{
@@ -17,7 +18,10 @@ export const CardSection: React.FC<CardSectionProps> = ({ header, children }) =>
                 flexDirection: "column",
             }}
         >
-            <H2>{header}</H2>
+            <H2>
+                {header}
+                {Icon && Icon}
+            </H2>
             <div
                 css={{
                     marginTop: ".5rem",
