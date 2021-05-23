@@ -8,6 +8,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
+import AddStudentsModal, { AddStudentsModalState } from "../components/modals/AddStudentsModal";
 import CreateLessonModal, { CreateLessonModalState } from "../components/modals/CreateLessonModal";
 import CreateTaskModal, { CreateTaskModalState } from "../components/modals/CreateTaskModal";
 import DeleteClassModal from "../components/modals/DeleteClassModal";
@@ -56,6 +57,7 @@ export function ClassPage() {
     const [, setCreateTaskModalOpen] = useRecoilState(CreateTaskModalState);
     const [, setCreateLessonModalOpen] = useRecoilState(CreateLessonModalState);
     const [, setDeleteStudentsModalOpen] = useRecoilState(DeleteStudentsModalState);
+    const [, setAddStudentsModalOpen] = useRecoilState(AddStudentsModalState);
 
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
@@ -76,6 +78,7 @@ export function ClassPage() {
             <CreateTaskModal classID={id} />
             <CreateLessonModal classID={id} />
             <RemoveStudentsModal classID={id} students={students} query={classesQuery} />
+            <AddStudentsModal classID={id} query={classesQuery} students={students} />
             <H1>
                 {name}{" "}
                 <DeleteForeverRounded
@@ -142,7 +145,10 @@ export function ClassPage() {
                     {students.map((s) => (
                         <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
                     ))}
-                    <NewItemCard message="Add Student" onClick={() => {}} />
+                    <NewItemCard
+                        message="Add Student"
+                        onClick={() => setAddStudentsModalOpen(true)}
+                    />
                 </CardSection>
             </div>
         </div>
