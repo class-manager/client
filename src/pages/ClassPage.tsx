@@ -67,6 +67,7 @@ export function ClassPage() {
                 id={id}
                 open={closeModalOpen}
                 subject={subject}
+                studentsLength={students.length}
             />
             <CreateTaskModal classID={id} />
             <CreateLessonModal classID={id} />

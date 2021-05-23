@@ -8,6 +8,7 @@ export interface DeleteClassModalProps {
     subject: string;
     id: string;
     open: boolean;
+    studentsLength: number;
     handleRequestClose: () => void;
 }
 
@@ -16,6 +17,7 @@ const DeleteClassModal: React.FC<DeleteClassModalProps> = ({
     id,
     subject,
     open,
+    studentsLength,
     handleRequestClose,
 }) => {
     const [submitting, setSubmit] = React.useState(false);
@@ -27,7 +29,7 @@ const DeleteClassModal: React.FC<DeleteClassModalProps> = ({
             modalLabel="Classes"
             danger
             primaryButtonText="Delete Class"
-            primaryButtonDisabled={submitting}
+            primaryButtonDisabled={submitting || studentsLength > 0}
             preventCloseOnClickOutside={submitting}
             open={open}
             onRequestClose={handleRequestClose}
@@ -45,9 +47,17 @@ const DeleteClassModal: React.FC<DeleteClassModalProps> = ({
             }}
         >
             {submitting && <Loading description="One moment" withOverlay={true} small />}
-            <p>
-                Are you sure you want to delete {subject} - {className}?
-            </p>
+            {studentsLength > 0 && (
+                <p>
+                    You cannot delete a class with students. Remove all students from the class
+                    before continuing.
+                </p>
+            )}
+            {studentsLength === 0 && (
+                <p>
+                    Are you sure you want to delete {subject} - {className}?
+                </p>
+            )}
         </Modal>
     );
 };
