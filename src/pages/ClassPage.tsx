@@ -143,7 +143,7 @@ export function ClassPage() {
                     }
                 >
                     {students.map((s) => (
-                        <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
+                        <BaseCard key={s.id} header={s.name} linkTo={`/students?id=${s.id}`} />
                     ))}
                     <NewItemCard
                         message="Add Student"
