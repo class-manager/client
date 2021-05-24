@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import BaseCard from "../components/cards/BaseCard";
-import StudentPanel from "../components/lessons/StudentPanel";
+import StudentPanel from "../components/lessons/StudentPanel/ContainerPanel";
 import DeleteLessonModal from "../components/modals/DeleteLessonModal";
 import { CardSection } from "../components/scaffold/CardSection";
 import H1 from "../components/text/H1";
@@ -87,7 +87,11 @@ export function LessonPage() {
                 </section>
                 <CardSection header="Students">
                     {students.map((s) => (
-                        <BaseCard key={s.id} header={s.name} linkTo={`/student/${s.id}`} />
+                        <BaseCard
+                            key={s.id}
+                            header={s.name}
+                            onClick={() => setCurrentStudent(s.id)}
+                        />
                     ))}
                 </CardSection>
                 <StudentPanel classID={classID} lessonID={lessonID} studentID={currentStudent} />

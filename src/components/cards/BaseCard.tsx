@@ -9,14 +9,21 @@ export interface BaseCardProps {
     subHeader?: string;
     linkTo?: string;
     customStyles?: Interpolation<{}>;
+    onClick?: () => void;
 }
 
-const BaseCard: React.FC<BaseCardProps> = ({ header, linkTo, subHeader, customStyles }) => {
+const BaseCard: React.FC<BaseCardProps> = ({
+    header,
+    linkTo,
+    subHeader,
+    customStyles,
+    onClick,
+}) => {
     const history = useHistory();
 
     return (
         <CardContainer
-            onClick={linkTo ? () => history.push(linkTo) : undefined}
+            onClick={onClick ? onClick : linkTo ? () => history.push(linkTo) : undefined}
             customStyles={customStyles}
         >
             <h3 css={{ fontWeight: 600 }}>{header}</h3>
