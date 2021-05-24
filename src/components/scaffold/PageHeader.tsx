@@ -1,6 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { AccountCircleRounded, ExitToAppRounded } from "@material-ui/icons";
-import { Header, HeaderGlobalAction, HeaderGlobalBar, HeaderName } from "carbon-components-react";
+import {
+    Header,
+    HeaderGlobalAction,
+    HeaderGlobalBar,
+    HeaderMenuItem,
+    HeaderName,
+    HeaderNavigation,
+} from "carbon-components-react";
 import * as React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -18,6 +25,9 @@ export default function PageHeader() {
             <Link to="/" css={{ textDecoration: "none" }}>
                 <HeaderName prefix="">Classman</HeaderName>
             </Link>
+            <HeaderNavigation>
+                <HeaderMenuItem onClick={() => history.push("/students")}>Students</HeaderMenuItem>
+            </HeaderNavigation>
             <HeaderGlobalBar>
                 {/* <Link to="/login"> */}
                 {loggedIn === loginState.NotLoggedIn && (
