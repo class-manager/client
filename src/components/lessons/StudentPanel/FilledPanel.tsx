@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import { DateTime } from "luxon";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { makeAuthenticatedRequest } from "../../../lib/api";
 
 export interface FilledStudentPanelProps {
