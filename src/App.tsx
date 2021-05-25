@@ -14,6 +14,7 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { HomePage } from "./pages/HomePage";
 import { LessonPage } from "./pages/LessonPage";
 import { StudentsPage } from "./pages/StudentsPage";
+import TaskPage from "./pages/TaskPage";
 
 const globalStyles = css({
     "*": {
@@ -78,6 +79,7 @@ function App() {
                         path="/class/:classID/lesson/:lessonID"
                         component={LessonPage}
                     />
+                    <ProtectedRoute path="/class/:classid/task/:taskid" component={TaskPage} />
                     <ProtectedRoute path="/class/:id" component={ClassPage} />
                     <ProtectedRoute path="/students" component={StudentsPage} />
                     <Route>

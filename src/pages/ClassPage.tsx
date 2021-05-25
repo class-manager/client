@@ -122,7 +122,7 @@ export function ClassPage() {
                             subHeader={DateTime.fromISO(t.timestamp).toLocaleString(
                                 DateTime.DATETIME_MED
                             )}
-                            linkTo={`/task/${t.id}`}
+                            linkTo={`/class/${id}/task/${t.id}`}
                         />
                     ))}
                     <NewItemCard

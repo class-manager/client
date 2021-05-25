@@ -61,6 +61,7 @@ export function DashboardPage() {
                 {classesQuery.data &&
                     classesQuery.data.tasks.map((t) => (
                         <TaskCard
+                            classid={t.class.id}
                             key={t.id}
                             id={t.id}
                             name={t.name}
