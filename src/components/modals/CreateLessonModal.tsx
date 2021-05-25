@@ -18,14 +18,14 @@ export interface CreateLessonModalProps {
     classID: string;
 }
 
-interface formValues {
+export interface ILessonFormValues {
     name: string;
     description?: string;
     startTime?: Date;
     endTime?: Date;
 }
 
-const validationSchema: Yup.SchemaOf<formValues> = Yup.object({
+export const createLessonValidationSchema: Yup.SchemaOf<ILessonFormValues> = Yup.object({
     description: Yup.string().optional(),
     startTime: Yup.date().required(),
     name: Yup.string().required(),
@@ -35,7 +35,7 @@ const validationSchema: Yup.SchemaOf<formValues> = Yup.object({
 });
 
 const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
-    const initialValues: formValues = {
+    const initialValues: ILessonFormValues = {
         name: "",
         startTime: DateTime.now().toJSDate(),
         endTime: DateTime.now().plus({ days: 7 }).toJSDate(),
@@ -50,9 +50,9 @@ const CreateLessonModal: React.FC<CreateLessonModalProps> = ({ classID }) => {
 
     const history = useHistory();
 
-    const formik = useFormik<formValues>({
+    const formik = useFormik<ILessonFormValues>({
         initialValues,
-        validationSchema,
+        validationSchema: createLessonValidationSchema,
         onSubmit: async (values, actions) => {
             try {
                 const res = await makeAuthenticatedRequest(

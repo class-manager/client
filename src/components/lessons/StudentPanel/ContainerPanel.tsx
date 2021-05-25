@@ -14,7 +14,7 @@ const StudentPanel: React.FC<StudentPanelProps> = ({ classID, lessonID, studentI
     // is a student ID provided.
 
     return (
-        <CardSection header="Student Details" styles={{ marginLeft: "0.5rem", width: 500 }}>
+        <CardSection header="Student Details">
             {studentID && (
                 <FilledStudentPanel classID={classID} lessonID={lessonID} studentID={studentID} />
             )}
