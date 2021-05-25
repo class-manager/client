@@ -29,7 +29,7 @@ export async function makeAuthenticatedRequest(method: HTTPMethod, path: string,
     return res;
 }
 
-function makeRequest({
+async function makeRequest({
     method,
     path,
     jwt,

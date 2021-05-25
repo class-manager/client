@@ -1,8 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { Form, Loading, Modal, TextInput } from "carbon-components-react";
+import { Form, InlineNotification, Loading, Modal, TextInput } from "carbon-components-react";
 import { useFormik } from "formik";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import { object, SchemaOf, string } from "yup";
+import { domain } from "..";
 
 interface registrationDetails {
     name: string;
@@ -23,9 +26,9 @@ export const RegistrationModalState = atom<boolean>({
     default: false,
 });
 export const RegistrationModal = () => {
-    const [registrationModalOpen, setRegistrationModalOpen] = useRecoilState(
-        RegistrationModalState
-    );
+    const history = useHistory();
+    const [registrationModalOpen, setRegistrationModalOpen] =
+        useRecoilState(RegistrationModalState);
 
     const validationSchema: SchemaOf<registrationDetails> = object({
         registrationEmail: string().email("Must be a valid email").required("Email is required"),
@@ -40,13 +43,33 @@ export const RegistrationModal = () => {
             .required(),
     });
 
+    const [failed, setFailed] = useState(false);
+
     const formik = useFormik<registrationDetails>({
         initialValues: initialRegistrationValues,
-        onSubmit: (values, actions) => {
-            console.log({ values, actions });
-            setTimeout(() => {
-                actions.setSubmitting(false);
-            }, 1000);
+        onSubmit: async ({ name, registrationEmail, registrationPassword }, actions) => {
+            const res = await fetch(`${domain}/api/v1/accounts/register`, {
+                method: "POST",
+                body: JSON.stringify({
+                    name,
+                    email: registrationEmail,
+                    password: registrationPassword,
+                }),
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (res.status === 412) {
+                // Email already registered
+                return setFailed(true);
+            }
+
+            if (res.status === 200) {
+                actions.resetForm();
+                history.replace("/dashboard");
+            }
         },
         validationSchema,
     });
@@ -61,9 +84,16 @@ export const RegistrationModal = () => {
             primaryButtonDisabled={!formik.isValid || formik.isSubmitting}
             onRequestClose={formik.isSubmitting ? undefined : () => setRegistrationModalOpen(false)}
             onRequestSubmit={() => formik.handleSubmit()}
-            size="xs"
+            size="md"
         >
             {formik.isSubmitting && <Loading description="One moment" withOverlay={true} small />}
+            {failed && (
+                <InlineNotification
+                    kind="error"
+                    title="Email already in use."
+                    onCloseButtonClick={() => setFailed(false)}
+                />
+            )}
             <Form
                 id="registration-form"
                 onSubmit={formik.handleSubmit}
