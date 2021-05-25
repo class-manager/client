@@ -4,12 +4,14 @@ import { Button, Loading } from "carbon-components-react";
 import { useFormik } from "formik";
 import * as React from "react";
 import { useState } from "react";
+import { UseQueryResult } from "react-query";
 import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { makeAuthenticatedRequest } from "../../lib/api";
 import { ITask, ITaskBase } from "../../pages/TaskPage";
 export interface TaskPagePanelProps {
     data: ITask;
+    query: UseQueryResult<unknown, unknown>;
 }
 
 const validationSchema: Yup.SchemaOf<ITaskBase> = Yup.object({
@@ -21,17 +23,19 @@ const validationSchema: Yup.SchemaOf<ITaskBase> = Yup.object({
     openDate: Yup.date().required(),
 });
 
-const TaskPagePanel: React.FC<TaskPagePanelProps> = ({ data }) => {
+const TaskPagePanel: React.FC<TaskPagePanelProps> = ({ data, query }) => {
     const history = useHistory();
 
     const formik = useFormik<ITaskBase>({
         initialValues: { ...data },
         onSubmit: async (values, actions) => {
-            const res = await makeAuthenticatedRequest(
+            await makeAuthenticatedRequest(
                 "PATCH",
                 `/classes/${data.classID}/tasks/${data.id}`,
                 values
             );
+
+            query.refetch();
         },
         validationSchema,
     });

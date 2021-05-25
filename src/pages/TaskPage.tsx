@@ -3,6 +3,7 @@ import { Loading } from "carbon-components-react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import TaskPagePanel from "../components/tasks/TaskPagePanel";
+import TaskResultsPanel from "../components/tasks/TaskResultsPanel";
 import { makeAuthenticatedRequest } from "../lib/api";
 
 export interface ITaskBase {
@@ -20,7 +21,7 @@ export interface ITask extends ITaskBase {
     classID: string;
 }
 
-interface StudentResult {
+export interface StudentResult {
     id: string;
     name: string;
     score: null | number;
@@ -61,8 +62,8 @@ export default function TaskPage() {
                 },
             }}
         >
-            <TaskPagePanel data={data} />
-            <section>Section 2</section>
+            <TaskPagePanel query={taskDetailsQuery} data={data} />
+            <TaskResultsPanel data={data} />
         </div>
     );
 }
