@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as React from "react";
-import { CardSection } from "../../scaffold/CardSection";
+import H1 from "../../text/H1";
 import FilledStudentPanel from "./FilledStudentPanel";
 
 export interface StudentPanelProps {
@@ -12,14 +12,15 @@ const StudentContainerPanel: React.FC<StudentPanelProps> = ({ studentID }) => {
     // is a student ID provided.
 
     return (
-        <CardSection header="Student Details" styles={{ marginLeft: "0.5rem", width: 500 }}>
+        <section>
+            <H1>Student Details</H1>
             {studentID && <FilledStudentPanel studentID={studentID} />}
             {!studentID && (
                 <div>
                     <h3 css={{ margin: "1rem" }}>No student selected</h3>
                 </div>
             )}
-        </CardSection>
+        </section>
     );
 };
 

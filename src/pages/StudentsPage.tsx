@@ -9,9 +9,9 @@ import { useRecoilState } from "recoil";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
 import { CreateClassModalState } from "../components/modals/CreateClassModal";
-import { CardSection } from "../components/scaffold/CardSection";
 import StudentContainerPanel from "../components/students/StudentPanel/ContainerStudentPanel";
 import { ReloadStudentsOverviewPage } from "../components/students/StudentPanel/FilledStudentPanel";
+import H1 from "../components/text/H1";
 import { makeAuthenticatedRequest } from "../lib/api";
 export function StudentsPage() {
     const [, setCreateClassModalOpen] = useRecoilState(CreateClassModalState);
@@ -49,31 +49,47 @@ export function StudentsPage() {
     return (
         <div
             css={{
-                padding: "1rem",
-                display: "flex",
-                flexDirection: "row",
+                // backgroundColor: "lightblue",
                 height: "100%",
-                background: "#FCFCFC",
+                display: "grid",
+                gridTemplateRows: "1fr",
+                gridTemplateColumns: "400px 1fr",
                 "& > section": {
-                    // maxWidth: 350,
-                    // width: "100%",
-                    margin: ".5rem",
+                    margin: "1rem",
+                    padding: "1rem",
+                    backgroundColor: "#fff",
+                    display: "flex",
+                    flexDirection: "column",
+                    boxShadow: `0 0px 10px rgba(0, 0, 0, 0.035),
+                            0 0px 80px rgba(0, 0, 0, 0.07);`,
                 },
-                flexWrap: "wrap",
             }}
         >
             {studentsQuery.isLoading && <Loading withOverlay />}
-            <CardSection header="Students">
-                {studentsQuery.data &&
-                    studentsQuery.data.map((s) => (
-                        <BaseCard
-                            header={`${s.firstName} ${s.lastName}`}
-                            subHeader={DateTime.fromISO(s.dob).toLocaleString(DateTime.DATE_MED)}
-                            onClick={() => setSelectedStudent(s.id)}
-                        />
-                    ))}
-                <NewItemCard message="Create Student" onClick={() => setSelectedStudent("new")} />
-            </CardSection>
+            <section>
+                <H1>Students</H1>
+                <section
+                    css={{
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
+                    {studentsQuery.data &&
+                        studentsQuery.data.map((s) => (
+                            <BaseCard
+                                header={`${s.firstName} ${s.lastName}`}
+                                subHeader={DateTime.fromISO(s.dob).toLocaleString(
+                                    DateTime.DATE_MED
+                                )}
+                                onClick={() => setSelectedStudent(s.id)}
+                            />
+                        ))}
+                    <NewItemCard
+                        message="Create Student"
+                        onClick={() => setSelectedStudent("new")}
+                    />
+                </section>
+            </section>
             <StudentContainerPanel studentID={selectedStudent} />
         </div>
     );

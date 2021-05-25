@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import * as Yup from "yup";
 import { makeAuthenticatedRequest } from "../../../lib/api";
+import ClassCard from "../../dashboard/ClassCard";
 
 export const ReloadStudentsOverviewPage = atom<boolean>({
     default: false,
@@ -70,6 +71,7 @@ const FilledStudentPanel: React.FC<FilledStudentPanelProps> = ({ studentID }) =>
                 generalNote: string | null;
                 graduatingClass: number;
                 studentNumber: string | null;
+                classes: { id: string; name: string; subject: string }[];
             };
         },
         { refetchOnWindowFocus: false, enabled: false }
@@ -251,6 +253,12 @@ const FilledStudentPanel: React.FC<FilledStudentPanelProps> = ({ studentID }) =>
                     name="generalNote"
                     css={[inputStyles, { height: 100 }]}
                 />
+            </section>
+            <section css={{ marginTop: "1rem", marginBottom: "1rem" }}>
+                <h3>Classes</h3>
+                {data?.classes.map((c) => (
+                    <ClassCard key={c.id} id={c.id} name={c.name} subject={c.subject} />
+                ))}
             </section>
             <Button
                 disabled={formik.isSubmitting || !formik.isValid}
