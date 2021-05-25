@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { DeleteForeverRounded } from "@material-ui/icons";
+import { DeleteForeverRounded, SaveRounded } from "@material-ui/icons";
 import { Loading } from "carbon-components-react";
+import { useFormik } from "formik";
 import { DateTime } from "luxon";
 import * as React from "react";
 import { useQuery } from "react-query";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import * as Yup from "yup";
 import BaseCard from "../components/cards/BaseCard";
 import NewItemCard from "../components/cards/NewItemCard";
 import AddStudentsModal, { AddStudentsModalState } from "../components/modals/AddStudentsModal";
@@ -16,7 +18,6 @@ import RemoveStudentsModal, {
     DeleteStudentsModalState,
 } from "../components/modals/RemoveStudentsModal";
 import { CardSection } from "../components/scaffold/CardSection";
-import H1 from "../components/text/H1";
 import { makeAuthenticatedRequest } from "../lib/api";
 
 interface classPageData {
@@ -37,6 +38,16 @@ interface classPageData {
         timestamp: string;
     }[];
 }
+
+interface classDetails {
+    name: string;
+    subject: string;
+}
+
+const validationSchema: Yup.SchemaOf<classDetails> = Yup.object({
+    name: Yup.string().required(),
+    subject: Yup.string().required(),
+});
 
 export function ClassPage() {
     const { id } = useParams<{ id: string }>();
@@ -59,6 +70,21 @@ export function ClassPage() {
     const [, setDeleteStudentsModalOpen] = useRecoilState(DeleteStudentsModalState);
     const [, setAddStudentsModalOpen] = useRecoilState(AddStudentsModalState);
 
+    const formik = useFormik<classDetails>({
+        initialValues: { name: "", subject: "" },
+        onSubmit: async (values) => {
+            await makeAuthenticatedRequest("PATCH", `/classes/${id}`, values);
+        },
+        validationSchema,
+    });
+
+    const { data } = classesQuery;
+
+    React.useMemo(() => {
+        if (data) formik.setValues({ name: data.name, subject: data.subject });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [classesQuery.data]);
+
     if (classesQuery.isLoading) return <Loading withOverlay />;
 
     if (!classesQuery.data) return <Redirect to="/dashboard" />;
@@ -67,6 +93,7 @@ export function ClassPage() {
 
     return (
         <div css={{ margin: "1rem" }}>
+            {formik.isSubmitting && <Loading description="One moment" withOverlay={true} small />}
             <DeleteClassModal
                 className={name}
                 handleRequestClose={() => setCloseModalOpen(false)}
@@ -79,22 +106,74 @@ export function ClassPage() {
             <CreateLessonModal classID={id} />
             <RemoveStudentsModal classID={id} students={students} query={classesQuery} />
             <AddStudentsModal classID={id} query={classesQuery} students={students} />
-            <H1>
-                {name}{" "}
+            <div>
+                <input
+                    type="text"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    name="name"
+                    placeholder="Enter class name"
+                    css={{
+                        fontWeight: 600,
+                        letterSpacing: "-0.05rem",
+                        marginBottom: ".25rem",
+                        color: "#000",
+                        height: 50,
+                        fontSize: 42,
+                        padding: 0,
+                        border: 0,
+                        "&:active": { outline: "none", backgroundColor: "lightgray" },
+                        "&:focus": { outline: "none", backgroundColor: "lightgray" },
+                    }}
+                />{" "}
                 <DeleteForeverRounded
                     onClick={() => setCloseModalOpen(true)}
                     color="disabled"
                     css={{ cursor: "pointer" }}
                 />
-            </H1>
-            <h3>{subject}</h3>
+                <SaveRounded
+                    color="disabled"
+                    css={{ cursor: "pointer" }}
+                    onClick={() => formik.submitForm()}
+                />
+            </div>
+            <input
+                type="text"
+                value={formik.values.subject}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                name="subject"
+                placeholder="Enter subject name"
+                css={{
+                    fontWeight: 400,
+                    letterSpacing: "-0.05rem",
+                    marginBottom: ".25rem",
+                    color: "#000",
+                    height: 36,
+                    fontSize: "1.75rem",
+                    padding: 0,
+                    border: 0,
+                    "&:active": { outline: "none", backgroundColor: "lightgray" },
+                    "&:focus": { outline: "none", backgroundColor: "lightgray" },
+                }}
+            />
             <div
                 css={{
-                    display: "flex",
+                    // backgroundColor: "lightblue",
+                    height: "100%",
+                    display: "grid",
+                    gridTemplateRows: "1fr",
+                    gridTemplateColumns: "repeat(3, 1fr)",
                     marginTop: "1rem",
-                    section: {
-                        marginRight: "0.5rem",
-                        "&:last-of-type": { marginRight: 0 },
+                    "& > section": {
+                        margin: ".5rem",
+                        padding: "1rem",
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        flexDirection: "column",
+                        boxShadow: `0 0px 10px rgba(0, 0, 0, 0.035),
+                            0 0px 80px rgba(0, 0, 0, 0.07);`,
                     },
                 }}
             >
