@@ -63,7 +63,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ classID }) => {
                 const data = (await res.json()) as { id: string; name: string; class: string };
                 actions.resetForm();
                 setOpen(false);
-                history.push(`/task/${data.id}`);
+                history.push(`/class/${classID}/task/${data.id}`);
             } catch (error) {}
         },
     });
