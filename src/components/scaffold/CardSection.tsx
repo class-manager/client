@@ -33,7 +33,7 @@ export const CardSection: React.FC<CardSectionProps> = ({ header, children, Icon
                     height: "100%",
                     backgroundColor: "#fff",
                     flexGrow: 1,
-                    overflow: "scroll",
+                    overflowY: "auto",
                 }}
             >
                 {children}
