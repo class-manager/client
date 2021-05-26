@@ -1,11 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { Form, InlineNotification, Loading, Modal, TextInput } from "carbon-components-react";
 import { useFormik } from "formik";
+import queryString from "query-string";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { atom, useRecoilState } from "recoil";
 import { object, SchemaOf, string } from "yup";
 import { domain } from "..";
+import { AccessTokenState } from "../lib/auth";
 
 interface registrationDetails {
     name: string;
@@ -27,6 +29,8 @@ export const RegistrationModalState = atom<boolean>({
 });
 export const RegistrationModal = () => {
     const history = useHistory();
+    const location = useLocation();
+
     const [registrationModalOpen, setRegistrationModalOpen] =
         useRecoilState(RegistrationModalState);
 
@@ -44,6 +48,7 @@ export const RegistrationModal = () => {
     });
 
     const [failed, setFailed] = useState(false);
+    const [, setToken] = useRecoilState(AccessTokenState);
 
     const formik = useFormik<registrationDetails>({
         initialValues: initialRegistrationValues,
@@ -67,9 +72,19 @@ export const RegistrationModal = () => {
             }
 
             if (res.status === 201) {
+                const data = (await res.json()) as { token: string };
+                setToken(data.token);
+
                 actions.resetForm();
                 setRegistrationModalOpen(false);
-                history.replace("/dashboard");
+
+                // Determine if there is a continue url
+                const continueURL = queryString.parse(location.search).to as string | undefined;
+                if (continueURL) {
+                    history.replace(continueURL);
+                } else {
+                    history.replace("/dashboard");
+                }
             }
         },
         validationSchema,
