@@ -66,8 +66,9 @@ export const RegistrationModal = () => {
                 return setFailed(true);
             }
 
-            if (res.status === 200) {
+            if (res.status === 201) {
                 actions.resetForm();
+                setRegistrationModalOpen(false);
                 history.replace("/dashboard");
             }
         },
