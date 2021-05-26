@@ -1,4 +1,4 @@
-FROM node:12.18-alpine
+FROM node:14-alpine
 ENV NODE_ENV production
 WORKDIR /app
 COPY ["package.json", "pnpm-lock.yaml", "tsconfig.json", "./"]
