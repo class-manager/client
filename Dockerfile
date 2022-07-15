@@ -1,7 +1,7 @@
 FROM node:14-alpine AS build
 ENV NODE_ENV production
 WORKDIR /app
-COPY ["package.json", "pnpm-lock.yaml", "tsconfig.json", "./"]
+COPY ["package.json", "pnpm-lock.yaml", "tsconfig.json", ".npmrc", "./"]
 RUN npm i -g pnpm && pnpm set strict-ssl false && pnpm install
 COPY ./src ./src
 COPY ./public ./public
